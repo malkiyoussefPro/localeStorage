@@ -96,3 +96,17 @@
     transform: rotateY(180deg);
     pointer-events: none;
   }
+
+  .cronometro{
+    background-color: rgb(179, 198, 198);
+    color: black;
+    width: 55px;
+    height: 55px;
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: 3px solid white; 
+}

@@ -1,0 +1,75 @@
+[
+    {
+      "title": "¿Qué significa CSS?",
+      "answer_1": "Cascading Style Sheets",
+      "answer_2": "Computer Style Sheets",
+      "answer_3": "Creative Style Sheets",
+      "answer_4": "Coded Style Sheets",
+      "right_answer": "Cascading Style Sheets"
+    },
+    {
+      "title": "¿Qué propiedad se utiliza para cambiar el color del texto de un elemento?",
+      "answer_1": "color",
+      "answer_2": "background-color",
+      "answer_3": "text-color",
+      "answer_4": "font-color",
+      "right_answer": "color"
+    },
+    {
+      "title": "¿Cómo puedes incluir CSS externo en tu documento HTML?",
+      "answer_1": "Usando la etiqueta <link>",
+      "answer_2": "Usando la etiqueta <style>",
+      "answer_3": "Usando la etiqueta <script>",
+      "answer_4": "Usando la etiqueta <meta>",
+      "right_answer": "Usando la etiqueta <link>"
+    },
+    {
+      "title": "¿Qué propiedad de CSS se utiliza para controlar el espaciado entre las líneas de texto?",
+      "answer_1": "line-height",
+      "answer_2": "spacing",
+      "answer_3": "letter-spacing",
+      "answer_4": "line-spacing",
+      "right_answer": "line-height"
+    },
+    {
+      "title": "¿Cuál es el propósito de la propiedad CSS 'display: none'?",
+      "answer_1": "Oculta un elemento sin afectar el diseño",
+      "answer_2": "Cambia el tamaño de fuente a cero",
+      "answer_3": "Elimina todos los bordes de un elemento",
+      "answer_4": "Muestra un elemento como un elemento de nivel de bloque",
+      "right_answer": "Oculta un elemento sin afectar el diseño"
+    },
+    {
+      "title": "¿Qué propiedad CSS se utiliza para establecer el fondo de un elemento?",
+      "answer_1": "background-color",
+      "answer_2": "color",
+      "answer_3": "background-image",
+      "answer_4": "background",
+      "right_answer": "background-image"
+    },
+    {
+      "title": "¿Cuál de las siguientes es una forma correcta de especificar el color de fondo en CSS?",
+      "answer_1": "background-color: #ffffff;",
+      "answer_2": "bgcolor: #ffffff;",
+      "answer_3": "color-background: #ffffff;",
+      "answer_4": "bg-color: #ffffff;",
+      "right_answer": "background-color: #ffffff;"
+    },
+    {
+      "title": "¿Qué propiedad CSS se utiliza para cambiar el tamaño del texto?",
+      "answer_1": "font-size",
+      "answer_2": "text-size",
+      "answer_3": "size",
+      "answer_4": "font-style",
+      "right_answer": "font-size"
+    },
+    {
+      "title": "¿Cuál es el selector de clase en CSS?",
+      "answer_1": "#",
+      "answer_2": ".",
+      "answer_3": "/",
+      "answer_4": ":",
+      "right_answer": "."
+    }
+  ]
+  
