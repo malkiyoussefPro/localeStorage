@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="styleLogin.css">
+</head>
+<body>
+  <div class="wrapper">
+    <form id="loginForm" action="#">
+      <h2>Login</h2>
+      <div class="input-field">
+        <input type="email" id="loginEmail" required>
+        <label>Enter your email</label>
+      </div>
+      <div class="input-field">
+        <input type="password" id="loginPassword" required>
+        <label>Enter your password</label>
+      </div>
+      <div class="forget">
+        <label for="remember">
+          <input type="checkbox" id="remember">
+          <span>Remember me</span>
+        </label>
+        <a href="#" id="forgotPasswordLink">Forgot password?</a> <!-- Agregar un ID al enlace -->
+      </div>
+      <button type="submit">Log In</button>
+      <div class="register">
+        <p>Don't have an account? <a href="registrarse.html">Register</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Recuperar el estado del checkbox del localStorage al cargar la página
+    document.addEventListener("DOMContentLoaded", function() {
+      var rememberCheckbox = document.getElementById('remember');
+      var rememberStatus = localStorage.getItem('rememberStatus');
+
+      if (rememberStatus === 'checked') {
+        rememberCheckbox.checked = true;
+        document.getElementById('loginEmail').value = localStorage.getItem('rememberedEmail');
+      }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar que el formulario se envíe por defecto
+      
+      // Obtener los valores ingresados por el usuario
+      var email = document.getElementById('loginEmail').value;
+      var password = document.getElementById('loginPassword').value;
+      
+      // Obtener el estado del checkbox "Remember me"
+      var rememberCheckbox = document.getElementById('remember');
+      var rememberStatus = rememberCheckbox.checked ? 'checked' : '';
+
+      // Guardar el estado del checkbox en el localStorage
+      localStorage.setItem('rememberStatus', rememberStatus);
+
+      // Guardar el correo electrónico en el localStorage si el checkbox está marcado
+      if (rememberStatus === 'checked') {
+        localStorage.setItem('rememberedEmail', email);
+      } else {
+        // Si el checkbox no está marcado, eliminar el correo electrónico del localStorage
+        localStorage.removeItem('rememberedEmail');
+      }
+
+      // Obtener los datos almacenados en localStorage
+      var usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+      // Definir la variable usuarioEncontrado fuera del bloque del if
+      var usuarioEncontrado = usuarios.find(usuario => usuario.email === email && usuario.password === password);
+
+      if (usuarioEncontrado) {
+        // Redirigir al usuario a otra página después del inicio de sesión
+        window.location.href = 'index.html';
+      } else {
+        alert('Credenciales inválidas. Por favor, inténtelo de nuevo.');
+      }
+    });
+
+    // Agregar evento de clic al enlace "Forgot password?"
+    document.getElementById('forgotPasswordLink').addEventListener('click', function(event) {
+      event.preventDefault(); // Evitar que el enlace redireccione
+      
+      // Obtener el correo electrónico ingresado en el formulario de inicio de sesión
+      var email = document.getElementById('loginEmail').value;
+      
+      // Obtener los datos almacenados en localStorage
+      var usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+
+      // Buscar el correo electrónico en la lista de usuarios
+      var usuarioEncontrado = usuarios.find(usuario => usuario.email === email);
+
+      if (usuarioEncontrado) {
+        alert('Tu contraseña es: ' + usuarioEncontrado.password);
+      } else {
+        alert('El correo electrónico ingresado no coincide con ningún usuario registrado.');
+      }
+    });
+  </script>
+  
+</body>
+</html>
