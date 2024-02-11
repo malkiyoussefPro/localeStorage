@@ -97,16 +97,9 @@
     pointer-events: none;
   }
 
-  .cronometro{
-    background-color: rgb(179, 198, 198);
-    color: black;
-    width: 55px;
-    height: 55px;
-    margin: 5px;
-    padding: 5px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    border-radius: 5px;
-    border: 3px solid white; 
+.rowCronometro {
+  display: flex; /* Usamos flexbox */
+  justify-content: center; /* Alineamos los elementos horizontalmente en el centro */
+  align-items: center; /* Alineamos los elementos verticalmente en el centro */
+  gap: 10px; /* Espacio entre los elementos */
 }

@@ -1,0 +1,75 @@
+[
+    {
+      "title": "¿Qué significa 'JS' en JavaScript?",
+      "answer_1": "Java Standard",
+      "answer_2": "Just Script",
+      "answer_3": "JavaScript",
+      "answer_4": "Java Syntax",
+      "right_answer": "JavaScript"
+    },
+    {
+      "title": "¿Cuál es la forma correcta de declarar una variable en JavaScript?",
+      "answer_1": "var myVar;",
+      "answer_2": "variable myVar;",
+      "answer_3": "myVar = var;",
+      "answer_4": "variable = myVar;",
+      "right_answer": "var myVar;"
+    },
+    {
+      "title": "¿Qué función se utiliza para imprimir en la consola en JavaScript?",
+      "answer_1": "console.print()",
+      "answer_2": "console.log()",
+      "answer_3": "print()",
+      "answer_4": "log()",
+      "right_answer": "console.log()"
+    },
+    {
+      "title": "¿Cuál es el resultado de 2 + '2' en JavaScript?",
+      "answer_1": "4",
+      "answer_2": "22",
+      "answer_3": "Error",
+      "answer_4": "NaN",
+      "right_answer": "22"
+    },
+    {
+      "title": "¿Cómo se llama el operador que se utiliza para concatenar cadenas en JavaScript?",
+      "answer_1": "+",
+      "answer_2": "&",
+      "answer_3": "|",
+      "answer_4": "^",
+      "right_answer": "+"
+    },
+    {
+      "title": "¿Cuál es la forma correcta de escribir un comentario de una línea en JavaScript?",
+      "answer_1": "// Esto es un comentario",
+      "answer_2": "/* Esto es un comentario */",
+      "answer_3": "# Esto es un comentario",
+      "answer_4": "' Esto es un comentario",
+      "right_answer": "// Esto es un comentario"
+    },
+    {
+      "title": "¿Cuál es el resultado de '5' == 5 en JavaScript?",
+      "answer_1": "true",
+      "answer_2": "false",
+      "answer_3": "Error",
+      "answer_4": "NaN",
+      "right_answer": "true"
+    },
+    {
+      "title": "¿Cuál es el método que se utiliza para obtener la longitud de un array en JavaScript?",
+      "answer_1": "length()",
+      "answer_2": "size()",
+      "answer_3": "count()",
+      "answer_4": "length",
+      "right_answer": "length"
+    },
+    {
+      "title": "¿Cuál es la palabra clave utilizada para declarar una función en JavaScript?",
+      "answer_1": "func",
+      "answer_2": "function",
+      "answer_3": "def",
+      "answer_4": "define",
+      "right_answer": "function"
+    }
+  ]
+  

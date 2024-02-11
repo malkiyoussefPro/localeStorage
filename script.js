@@ -61,6 +61,8 @@ guardarUsuarioForm.addEventListener("submit", function(event){
     password1.value = "";
     confirmPassword.value = "";
 });
+// Redirigir al usuario a la página de juego después de registrar
+window.location.href = "login.html";
 
 
 //Mostrar text de password
