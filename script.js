@@ -4,7 +4,7 @@ let lastName = document.getElementById('LastName');
 let email = document.getElementById("Email");
 let password1 = document.getElementById('Password');
 let confirmPassword = document.getElementById('ConfirmPassword');
-let guardarUsuarioForm = document.querySelector('form'); // Seleccionamos el formulario completo en lugar del botón
+let guardarUsuarioForm = document.querySelector('form');
 
 guardarUsuarioForm.addEventListener("submit", function(event){
     event.preventDefault(); // Evitar que el formulario se envíe por defecto
@@ -34,9 +34,6 @@ guardarUsuarioForm.addEventListener("submit", function(event){
         return; // Detener la ejecución si la contraseña es demasiado corta
     }
 
-    // Si llegamos aquí, significa que todos los campos están llenos y las contraseñas coinciden y tienen la longitud adecuada
-    // Resto del código para guardar el usuario...
-
     // Obtener la lista actual de usuarios del localStorage
     let usuarios = JSON.parse(lStr.getItem("usuarios")) || [];
 
@@ -45,7 +42,7 @@ guardarUsuarioForm.addEventListener("submit", function(event){
         nombre: nombre.value,
         lastName: lastName.value,
         email: email.value,
-        password: password1.value // Corregir el nombre de la propiedad de la contraseña
+        password: password1.value
     };
 
     // Agregar el nuevo usuario a la lista
@@ -60,12 +57,12 @@ guardarUsuarioForm.addEventListener("submit", function(event){
     email.value = "";
     password1.value = "";
     confirmPassword.value = "";
+
+    // Redirigir al usuario a la página de inicio de sesión después de registrar
+    window.location.href = "login.html";
 });
-// Redirigir al usuario a la página de juego después de registrar
-window.location.href = "login.html";
 
-
-//Mostrar text de password
+//Mostrar texto de contraseña
 
 document.addEventListener("DOMContentLoaded", function() {
     let passwordInput = document.getElementById('Password');
@@ -95,10 +92,9 @@ function recuperarValores() {
         nombre.value = primerUsuario.nombre;
         lastName.value = primerUsuario.lastName;
         email.value = primerUsuario.email;
-        password1.value = primerUsuario.password1;
-        confirmPassword.value = primerUsuario.password1; // Puede que no quieras mostrar la contraseña confirmada
+        password1.value = primerUsuario.password;
+        confirmPassword.value = primerUsuario.password;
     }
 }
-
 
 document.addEventListener("DOMContentLoaded", recuperarValores);

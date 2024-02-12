@@ -135,3 +135,16 @@ button:hover {
   margin-top: 30px;
   color: #fff;
 }
+.foot{
+  position: fixed;
+  margin-top: 15px ;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color:#ea33ff;
+ 
+}
+.foot p{
+  color: white;
+  padding: 15px;
+}

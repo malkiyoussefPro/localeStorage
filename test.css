@@ -1,0 +1,189 @@
+/* Restablecimiento de estilos */
+
+* {
+  box-sizing: border-box;
+}
+
+/* Estilos generales */
+
+body {
+  font-family: Arial, Tahoma, sans-serif;
+}
+
+/* Contenedor de control */
+
+.control-buttons {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(3, 169, 244, 0.9);
+}
+
+.control-buttons span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #F44336;
+  color: #FFF;
+  padding: 15px 25px;
+  font-size: 30px;
+  text-align: center;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Contenedor de información */
+
+.info-container {
+  width: 1080px;
+  margin: 20px auto 0;
+  background-color: #F6F6F6;
+  padding: 20px;
+  font-size: 24px;
+  overflow: hidden;
+  border: 2px solid #2196f3;
+  margin-top: 20px; /* Margen entre el navbar y el info-container */
+}
+
+.info-container .name {
+  float: left;
+  width: 50%;
+}
+
+.info-container .tries {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+
+/* Bloques del juego de memoria */
+
+.memory-game-blocks {
+  display: flex;
+  width: 1100px;
+  flex-wrap: wrap;
+  margin: 20px auto;
+}
+
+.memory-game-blocks.no-clicking {
+  pointer-events: none;
+}
+
+.memory-game-blocks .game-block {
+  height: 200px;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  flex: 1 0 200px;
+  margin: 0 10px 20px;
+}
+
+.memory-game-blocks .game-block .front {
+  background-color: #333;
+  line-height: 200px;
+}
+
+.memory-game-blocks .game-block .front:before {
+  content: "!";
+  color: #FFF;
+  font-size: 140px;
+  font-weight: bold;
+}
+
+.memory-game-blocks .game-block .back {
+  background-color: #607D8B;
+  transform: rotateY(180deg);
+}
+
+.memory-game-blocks .game-block .back img {
+  width: 140px;
+  height: 140px;
+  margin-top: 30px;
+}
+
+.memory-game-blocks .game-block .face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  backface-visibility: hidden;
+  border: 5px solid #2196F3;
+}
+
+.memory-game-blocks .game-block.is-flipped,
+.memory-game-blocks .game-block.has-match {
+  transform: rotateY(180deg);
+  pointer-events: none;
+}
+
+/* Cronometro */
+
+.rowCronometro {
+  display: flex; /* Usamos flexbox */
+  justify-content: center; /* Alineamos los elementos horizontalmente en el centro */
+  align-items: center; /* Alineamos los elementos verticalmente en el centro */
+  gap: 10px; /* Espacio entre los elementos */
+}
+
+/* Barra de navegación */
+
+.navbar {
+  background-color: #333;
+  color: #fff;
+  height: 50px;
+  width: 1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Estilos específicos */
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  margin: 10px;
+}
+
+.navbar a:hover {
+  color: #ddd;
+}
+
+.auth-buttons {
+  float: right;
+}
+
+.auth-buttons a {
+  background-color: #0077b7;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.auth-buttons a:hover {
+  background-color: #005587;
+}
+
+/* Pie de página */
+
+.foot {
+  position: fixed;
+  margin-top: 15px;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: black;
+}
+
+.foot p {
+  color: white;
+  padding: 15px;
+}
+

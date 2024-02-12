@@ -35,6 +35,10 @@
     overflow: hidden;
     border: 2px solid #2196f3;
   }
+  .info-container {
+    margin-top: 20px; 
+  }
+  
   .info-container .name {
     float: left;
     width: 50%;
@@ -102,4 +106,56 @@
   justify-content: center; /* Alineamos los elementos horizontalmente en el centro */
   align-items: center; /* Alineamos los elementos verticalmente en el centro */
   gap: 10px; /* Espacio entre los elementos */
+}
+
+  
+.navbar {
+  background-color: #333;
+  color: #fff;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Estilos específicos */
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  margin: 10px;
+}
+
+.navbar a:hover {
+  color: #ddd;
+}
+
+.auth-buttons {
+  float: right;
+}
+
+.auth-buttons a {
+  background-color: #0077b7;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.auth-buttons a:hover {
+  background-color: #005587;
+}
+.foot{
+  position: fixed;
+  margin-top: 15px ;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color:black;
+ 
+}
+.foot p{
+  color: white;
+  padding: 15px;
 }

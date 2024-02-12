@@ -31,7 +31,7 @@ form {
   border: 1px solid rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
-  background-color: rgba(255, 255, 255, 0.1); /* Cambia el color de fondo según tus necesidades */
+  background-color: rgba(255, 255, 255, 0.1); 
 }
 
 label {
@@ -91,4 +91,17 @@ button:hover {
   color: #fff;
   border-color: #fff;
   background: rgba(255, 255, 255, 0.15);
+}
+.foot{
+  position: fixed;
+  margin-top: 15px ;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color:#ea33ff;
+ 
+}
+.foot p{
+  color: white;
+  padding: 15px;
 }

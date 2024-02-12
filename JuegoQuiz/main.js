@@ -12,8 +12,31 @@ let countdownElement = document.querySelector(".countdown");
 let currentIndex = 0;
 let rightAnswers = 0;
 let countdownInterval;
+function getCategoryFromFileName(filename) {
+  if (filename.includes("html_questions.json")) {
+    return "HTML";
+  } else if (filename.includes("css_questions.json")) {
+    return "CSS";
+  } else if (filename.includes("js_questions.json")) {
+    return "JavaScript";
+  } else {
+    return "Unknown";
+  }
+}
+
+function showCategory(category) {
+  let categorySpan = document.querySelector(".category span");
+  categorySpan.textContent = category;
+}
 
 function getQuestions() {
+  let jsonFiles = ["html_questions.json", "css_questions.json", "js_questions.json"];
+  let randomFile = jsonFiles[Math.floor(Math.random() * jsonFiles.length)];
+  // Obtener la categoría del archivo JSON seleccionado
+  let category = getCategoryFromFileName(randomFile);
+
+  // Mostrar la categoría en el elemento HTML
+  showCategory(category);
   let myRequest = new XMLHttpRequest();
 
   myRequest.onreadystatechange = function () {
@@ -53,7 +76,7 @@ function getQuestions() {
 
         // Start CountDown
         clearInterval(countdownInterval);
-        countdown(3, qCount);
+        countdown(10, qCount);
 
         // Show Results
         showResults(qCount);
@@ -61,9 +84,11 @@ function getQuestions() {
     }
   };
 
-  myRequest.open("GET", "html_questions.json", true);
+  myRequest.open("GET", randomFile, true);
   myRequest.send();
 }
+
+
 
 getQuestions();
 

@@ -1,35 +1,42 @@
-
-
 // Al cargar la página
 window.onload = function () {
-    // Verificar si hay un nombre guardado en el localStorage
-    let savedName = localStorage.getItem('savedName');
-    if (savedName) {
-        // Si hay un nombre guardado, establecerlo en la interfaz
-        document.querySelector(".name span").innerHTML = savedName;
-    }
+  // Verificar si hay un nombre guardado en el localStorage
+  let savedName = localStorage.getItem('savedName');
+  if (savedName) {
+      // Si hay un nombre guardado, establecerlo en el elemento HTML
+      document.getElementById('userName').textContent = savedName;
+  }
 
-    // Seleccionar el botón de inicio del juego
-    document.querySelector(".control-buttons span").onclick = function () {
-        // Obtener el nombre del usuario
-        let yourName = localStorage.getItem('savedName');
+  if (savedName) {
+    // Si hay un nombre guardado, establecerlo en el elemento HTML
+    document.getElementById('userName').textContent = savedName;
+  }
+  
+  // Seleccionar el botón de inicio del juego
+  document.querySelector(".control-buttons span").onclick = function () {
+      // Obtener el nombre del usuario
+      let yourName = localStorage.getItem('savedName');
 
-        // Si el nombre no está vacío
-        if (yourName && yourName.trim() !== "") {
-            // Establecer el nombre en la interfaz
-            document.querySelector(".name span").innerHTML = yourName.trim();
-        }
+      // Si el nombre no está vacío
+      if (yourName && yourName.trim() !== "") {
+          // Establecer el nombre en la interfaz
+          document.querySelector(".name span").innerHTML = yourName.trim();
+      }
 
-        // Remove Splash Screen
-        document.querySelector(".control-buttons").remove();
+      // Guardar el nombre del usuario en el localStorage
+      localStorage.setItem('savedName', yourName);
 
-        // Iniciar cronómetro
-        cronometroInterval = setInterval(actualizarCronometro, 10);
+      // Remove Splash Screen
+      document.querySelector(".control-buttons").remove();
 
-        // Restablecer puntuación
-        document.querySelector('.tries span').innerHTML = '0';
-    };
+      // Iniciar cronómetro
+      cronometroInterval = setInterval(actualizarCronometro, 10);
+
+      // Restablecer puntuación
+      document.querySelector('.tries span').innerHTML = '0';
+  };
 };
+
 // Al cargar la página
 window.onload = function () {
   // Restablecer puntuación
@@ -43,7 +50,31 @@ window.onload = function () {
       // Remove Splash Screen
       document.querySelector(".control-buttons").remove();
   };
+
+  // Seleccionar el contenedor de bloques
+  blocksContainer = document.querySelector(".memory-game-blocks");
+
+  // Create Array From Game Blocks
+  let blocks = Array.from(blocksContainer.children);
+
+  // Create Range Of Keys
+  let orderRange = Array.from(Array(blocks.length).keys());
+
+  shuffle(orderRange);
+
+  // Add Order Css Property To Game Blocks
+  blocks.forEach((block, index) => {
+      // Add CSS Order Property
+      block.style.order = orderRange[index];
+
+      // Add Click Event
+      block.addEventListener('click', function () {
+          // Trigger The Flip Block Function
+          flipBlock(block);
+      });
+  });
 };
+
 // Variables globales para el cronómetro
 let minutos = 0;
 let segundos = 0;
@@ -195,18 +226,39 @@ function calcularPuntos() {
   let tiempoTotalSegundos = minutos * 60 + segundos + milisegundos / 100;
 
   // Verificar las condiciones para asignar puntos
-  if (minutos === 1 && intentos <= 10) {
-      return 10; // 1 minuto con 10 o menos errores
-  } else if (minutos === 2 && intentos <= 15) {
-      return 5; // 2 minutos con 15 o menos errores
-  } else if (minutos >= 3 || intentos > 15) {
-      return 0; // 3 minutos o más, o más de 15 errores
-  } else {
-      // En caso de no cumplir ninguna de las condiciones anteriores, retornar 0
-      return 0;
+  if (minutos === 1 && intentos <= 35) {
+    window.location.href = '/JuegoQuiz/index.html';
+      return 20;
+       // 1 minuto con 20 o menos errores
+       //passar al otro juego
+  } else if (minutos === 2 && intentos <= 40) {
+      return 15; // 2 minutos con 25 o menos errores
+  } else if (minutos >= 3 && intentos > 55) {
+      return 10; // 3 minutos o más, o más de 25 errores
+  }   else if (intentos > 55) {
+    return 0; // 3 minutos o más, o más de 25 errores
+  }
+  else {
+      // Otro caso
+      return calcularPuntosPorTiempo(tiempoTotalSegundos, intentos);
   }
 }
-  
+
+// Función para calcular la puntuación basada en el tiempo y los intentos
+// Función para calcular la puntuación basada en el tiempo y los intentos
+function calcularPuntosPorTiempo(tiempoTotalSegundos, intentos) {
+  if (tiempoTotalSegundos <= 60 && intentos <= 35) {
+      return 20; // Menos de 1 minuto con 35 o menos errores
+  } else if (tiempoTotalSegundos <= 120 && intentos <= 40) {
+      return 15; // Menos de 2 minutos con 40 o menos errores
+  }  else if (tiempoTotalSegundos <= 180 && intentos <= 55) {
+    return 10; // Menos de 3 minutos con 55 o menos errores
+  } else {
+    return 0; // 3 minutos o más, o más de 55 errores
+  }
+}
+
+
   // Shuffle Function
   function shuffle(array) {
   
@@ -235,4 +287,46 @@ function calcularPuntos() {
     }
     return array;
   }
+  // Función para guardar la puntuación en localStorage
+function guardarPuntuacion(puntos) {
+  // Obtener el nombre del usuario
+  let savedName = localStorage.getItem('savedName');
+
+  // Crear un objeto para almacenar la puntuación del usuario
+  let userScore = {
+      name: savedName,
+      score: puntos
+  };
+
+  // Obtener el array de puntuaciones del localStorage
+  let scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+  // Agregar la nueva puntuación al array
+  scores.push(userScore);
+
+  // Ordenar las puntuaciones por puntuación descendente
+  scores.sort((a, b) => b.score - a.score);
+
+  // Limitar la cantidad de puntuaciones guardadas (opcional)
+  scores = scores.slice(0, 10); // Por ejemplo, guardamos solo las 10 mejores puntuaciones
+
+  // Guardar el array de puntuaciones actualizado en el localStorage
+  localStorage.setItem('scores', JSON.stringify(scores));
+}
+// Función para finalizar el juego
+function finalizarJuego(puntos) {
+  // Detener el cronómetro
+  clearInterval(cronometroInterval);
+
+  // Desactivar la interacción con los bloques
+  blocksContainer.classList.add('no-clicking');
+
+  // Mostrar puntuación final
+  alert('¡Juego terminado! Tu puntuación es: ' + puntos);
+
+  // Guardar la puntuación del usuario
+  guardarPuntuacion(puntos);
+}
+
+
   

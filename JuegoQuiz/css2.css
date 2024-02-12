@@ -101,3 +101,41 @@
   .quiz-app .results span.perfect {
     color: #0075ff;
   }
+    
+.navbar {
+  background-color: #333;
+  color: #fff;
+  height: 50px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Estilos específicos */
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+  margin: 10px;
+}
+
+.navbar a:hover {
+  color: #ddd;
+}
+
+.auth-buttons {
+  float: right;
+}
+
+.auth-buttons a {
+  background-color: #0077b7;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.auth-buttons a:hover {
+  background-color: #005587;
+}
