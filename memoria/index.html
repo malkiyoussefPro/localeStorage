@@ -8,12 +8,13 @@
   </head>
   <body>
     <nav class="navbar">
-        <a href="#">Home</a>
-        <a href="#">About</a>
+
+        <a href=""><img src="/logoScaape Room.png" height="50px" width="50px"></a>
+        
 
         <div class="auth-buttons">
-          <a href="login.html">Login</a>
-          <a href="registrarse.html">Register</a>
+          <a href="../login.html">Login</a>
+          <a href="../registrarse.html">Register</a>
         </div>
     </nav>
 
@@ -22,16 +23,18 @@
       <span>Start Game</span>
     </div>
     <div class="info-container">
-      <div class="name">
-        Hello: <span id="userName"></span>
-      </div>
-      <div class="row">
-        <div class="cronometro" id="minutos"><p>M:</p> 0</div>
-        <div class="cronometro" id="segundos"><p>S:</p> 0</div>
-        <div class="cronometro" id="milisegundos"><p>Ms: </p> 0</div>
-      </div>
-      <div class="tries">
-        Wrong Tries: <span>0</span>
+      <div class="container">
+        <div class="name">
+          Hello: <span id="userName"></span>
+        </div>
+        <div class="row">
+          <div class="cronometro" id="minutos"><p>M:</p> 0</div>
+          <div class="cronometro" id="segundos"><p>S:</p> 0</div>
+          <div class="cronometro" id="milisegundos"><p>Ms: </p> 0</div>
+        </div>
+        <div class="tries">
+          Wrong Tries: <span>0</span>
+        </div>
       </div>
     <div class="memory-game-blocks">
       <div class="game-block" data-technology="angular">
@@ -156,8 +159,13 @@
       </div>
     </div>
   
-    <audio id="success" src="audio/success1.mp3" preload="auto"></audio>
-    <audio id="fail" src="audio/fail1.mp3" preload="auto"></audio>
+    <audio id="success" src="audio/success.mp3" preload="auto"></audio>
+    <audio id="fail" src="audio/fail.mp3" preload="auto"></audio>
     <script src="main.js"></script>
+    <footer>
+      <div class="foot">
+          <p>Designed By Youssef Malki</p>
+      </div>
+      </footer>
   </body>
 </html>

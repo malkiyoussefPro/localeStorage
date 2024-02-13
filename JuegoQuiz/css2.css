@@ -54,7 +54,7 @@
     top: -1px;
   }
   .quiz-app .submit-button {
-    background-color: #0075ff;
+    background-color: #f4661b;
     display: block;
     width: 100%;
     padding: 15px;
@@ -102,8 +102,10 @@
     color: #0075ff;
   }
     
+
+/* Estilos específicos del navbar */
 .navbar {
-  background-color: #333;
+  background-color: #00adff;
   color: #fff;
   height: 50px;
   width: 100%;
@@ -111,31 +113,47 @@
   top: 0;
   left: 0;
   z-index: 100;
-}
-
-/* Estilos específicos */
-
-.navbar a {
-  text-decoration: none;
-  color: #fff;
-  padding: 10px;
-  margin: 10px;
-}
-
-.navbar a:hover {
-  color: #ddd;
+  display: flex; /* Hacer la barra de navegación un contenedor flex */
+  justify-content: space-between; /* Alinear los elementos a los extremos */
+  align-items: center; /* Centrar verticalmente los elementos */
 }
 
 .auth-buttons {
-  float: right;
+  display: flex; /* Convertir el contenedor de botones en un contenedor flex */
+  justify-content: center; /* Centrar los elementos horizontalmente */
+  align-items: center; /* Centrar los elementos verticalmente */
 }
 
 .auth-buttons a {
-  background-color: #0077b7;
+  text-decoration: none;
+  background-color: #240090;
   border-radius: 5px;
   padding: 5px 10px;
+  margin: 0 5px; /* Agregar margen entre los botones */
+  color: #fff;
 }
 
 .auth-buttons a:hover {
-  background-color: #005587;
+  background-color: #f4661b;
+}
+
+
+
+
+
+
+
+/* Estilos específicos del footer */
+.foot{
+  position: fixed;
+  margin-top: 15px ;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color:#ea33ff;
+ 
+}
+.foot p{
+  color: white;
+  padding: 15px;
 }

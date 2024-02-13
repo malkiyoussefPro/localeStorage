@@ -7,6 +7,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
+/* Estilos específicos del body */
 body {
   display: flex;
   align-items: center;
@@ -21,6 +22,7 @@ body {
   background-size: cover;
 }
 
+/* Estilos específicos del form */
 form {
   display: flex;
   flex-direction: column;
@@ -92,6 +94,8 @@ button:hover {
   border-color: #fff;
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* Estilos específicos del footer */
 .foot{
   position: fixed;
   margin-top: 15px ;
