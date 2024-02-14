@@ -1,3 +1,17 @@
+// Al cargar la página
+window.addEventListener('load', function () {
+  // Verificar si hay un nombre guardado en el localStorage
+  let savedName = localStorage.getItem('savedName');
+
+  // Si hay un nombre guardado, establecerlo en el elemento HTML
+  if (savedName) {
+    document.getElementById('userName').innerText = savedName;
+  }
+});
+
+
+
+
 // Select Elements
 let countSpan = document.querySelector(".count span");
 let bullets = document.querySelector(".bullets");
@@ -209,12 +223,16 @@ function showResults(count) {
       theResults = `<span class="bad">Bad</span>, ${rightAnswers} From ${count}`;
     }
 
+    // Guardar el número de respuestas correctas en localStorage
+    localStorage.setItem('quizResults', rightAnswers);
+
     resultsContainer.innerHTML = theResults;
     resultsContainer.style.padding = "10px";
     resultsContainer.style.backgroundColor = "white";
     resultsContainer.style.marginTop = "10px";
   }
 }
+
 
 function countdown(duration, count) {
   if (currentIndex < count) {

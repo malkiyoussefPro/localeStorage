@@ -4,21 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz App</title>
-    <link rel="stylesheet" href="css2.css" />
+    <link rel="stylesheet" href="juegoQuiz.css" />
   </head>
   <body>
     <nav class="navbar">
       <a href=""><img src="/logoScaape Room.png" height="50px" width="50px"></a>
       
+       
 
       <div class="auth-buttons">
         <a href="../login.html">Login</a>
         <a href="../registrarse.html">Register</a>
       </div>
   </nav>
+  
     <div class="quiz-app">
       <div class="quiz-info">
-        <div class="category">Category: <span></span></div>
+        <div class="name">
+          Hello: <span id="userName"></span>
+        </div>
+        <div class="category" id="category">Category: <span></span></div>
         <div class="count">Questions Count: <span></span></div>
       </div>
       <div class="quiz-area"></div>
@@ -30,7 +35,7 @@
       </div>
       <div class="results"></div>
     </div>
-    <script src="main.js"></script>
+    <script src="juegoQuiz.js"></script>
     <footer>
       <div class="foot">
           <p>Designed By Youssef Malki</p>

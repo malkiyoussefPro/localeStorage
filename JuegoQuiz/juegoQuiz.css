@@ -14,9 +14,12 @@
     display: flex;
     background-color: #fff;
     padding: 20px;
+   
   }
   .quiz-app .quiz-info .category {
     flex: 1;
+    margin-left: 10px;
+   
   }
   .quiz-app .quiz-info .count {
     flex: 1;

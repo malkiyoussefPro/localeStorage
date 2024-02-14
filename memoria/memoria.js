@@ -1,6 +1,6 @@
 // Al cargar la página
 window.addEventListener('load', function () {
-  console.log('HI');
+
   // Verificar si hay un nombre guardado en el localStorage
   let savedName = localStorage.getItem('savedName');
   
@@ -228,7 +228,7 @@ function calcularPuntos() {
 
   // Verificar las condiciones para asignar puntos
   if (minutos === 1 && intentos <= 35) {
-    window.location.href = '/JuegoQuiz/index.html';
+    window.location.href = '/JuegoQuiz/juegoQuiz.html';
       return 20;
        // 1 minuto con 20 o menos errores
        //passar al otro juego
@@ -314,6 +314,22 @@ function guardarPuntuacion(puntos) {
   // Guardar el array de puntuaciones actualizado en el localStorage
   localStorage.setItem('scores', JSON.stringify(scores));
 }
+
+// Función para verificar si se alcanzaron los 20 puntos
+function verificarPuntos(puntos) {
+  if (puntos < 20) {
+      // Preguntar al usuario si desea jugar de nuevo
+      if (confirm("No has alcanzado los 20 puntos. ¿Deseas jugar de nuevo?")) {
+          // Si el usuario quiere jugar de nuevo, recargar la página para reiniciar el juego
+          window.location.reload();
+      } else {
+          // Si el usuario no quiere jugar de nuevo, redirigirlo a la pagina de welcome para  realizar otra acción
+          
+          window.location.href = '../welcome.html';
+      }
+  }
+}
+
 // Función para finalizar el juego
 function finalizarJuego(puntos) {
   // Detener el cronómetro
@@ -327,7 +343,16 @@ function finalizarJuego(puntos) {
 
   // Guardar la puntuación del usuario
   guardarPuntuacion(puntos);
+
+  // Verificar si se alcanzaron los 20 puntos
+  verificarPuntos(puntos);
 }
+
+
+
+
+
+
 
 
   

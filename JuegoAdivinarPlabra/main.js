@@ -2,7 +2,7 @@
 let gameName = "Guess The Word";
 document.title = gameName;
 document.querySelector("h1").innerHTML = gameName;
-document.querySelector("footer").innerHTML = `${gameName} Game Created By Elzero Web School`;
+document.querySelector("footer").innerHTML = `${gameName} Game Created By Youssef Malki`;
 
 // Setting Game Options
 let numbersOfTries = 6;
