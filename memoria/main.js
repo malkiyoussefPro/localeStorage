@@ -1,16 +1,17 @@
 // Al cargar la página
-window.onload = function () {
+window.addEventListener('load', function () {
+  console.log('HI');
   // Verificar si hay un nombre guardado en el localStorage
   let savedName = localStorage.getItem('savedName');
+  
+  console.log(localStorage.getItem('savedName'));
   if (savedName) {
+    
       // Si hay un nombre guardado, establecerlo en el elemento HTML
-      document.getElementById('userName').textContent = savedName;
+      document.getElementById('userName').innerText = savedName;
   }
 
-  if (savedName) {
-    // Si hay un nombre guardado, establecerlo en el elemento HTML
-    document.getElementById('userName').textContent = savedName;
-  }
+
   
   // Seleccionar el botón de inicio del juego
   document.querySelector(".control-buttons span").onclick = function () {
@@ -20,9 +21,9 @@ window.onload = function () {
       // Si el nombre no está vacío
       if (yourName && yourName.trim() !== "") {
           // Establecer el nombre en la interfaz
-          document.querySelector(".name span").innerHTML = yourName.trim();
+          document.getElementById('userName').innerHTML = yourName;
       }
-
+      console.log(savedName);
       // Guardar el nombre del usuario en el localStorage
       localStorage.setItem('savedName', yourName);
 
@@ -35,7 +36,7 @@ window.onload = function () {
       // Restablecer puntuación
       document.querySelector('.tries span').innerHTML = '0';
   };
-};
+});
 
 // Al cargar la página
 window.onload = function () {

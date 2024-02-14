@@ -35,7 +35,7 @@
   <script>
     document.getElementById('loginForm').addEventListener('submit', function(event) {
   event.preventDefault(); // Evitar que el formulario se envíe por defecto
-  
+ 
   var nombre = document.getElementById('loginName').value;
   var password = document.getElementById('loginPassword').value;
   
@@ -55,6 +55,12 @@
   var usuarioEncontrado = usuarios.find(usuario => usuario.nombre === nombre && usuario.password === password);
 
   if (usuarioEncontrado) {
+    //cuando enceuntra el usuario hay que guardarlo
+   /*
+    
+   */
+  console.log(nombre);
+    localStorage.setItem('savedName',nombre);
     window.location.href = '/memoria/index.html';
   } else {
     alert('Credenciales inválidas. Por favor, inténtelo de nuevo.');
