@@ -253,3 +253,17 @@ function countdown(duration, count) {
     }, 1000);
   }
 }
+
+document.getElementById('logoutButton').style.display = 'inline-block'; // Mostrar botón de logout
+// Evento de clic para el botón de logout
+document.getElementById('logoutButton').addEventListener('click', function(event) {
+  event.preventDefault(); // Evitar que el enlace redireccione
+
+  // Limpiar datos de sesión almacenados en el localStorage
+  localStorage.removeItem('savedName');
+  localStorage.removeItem('rememberStatus');
+  localStorage.removeItem('rememberedName');
+
+  // Redireccionar a la página de inicio de sesión
+  window.location.href = '../welcome.html';
+});
