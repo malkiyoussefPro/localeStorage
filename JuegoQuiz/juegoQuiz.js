@@ -419,8 +419,10 @@ document.getElementById('deleteUserButton').addEventListener('click', function()
     }
 });
 
+document.getElementById('mostrarEstadisticasButton').addEventListener('click', function() {
+    mostrarEstadisticas();
+});
 
-// Función para mostrar estadísticas del juego
 
 function mostrarEstadisticas() {
     // Obtener nombre del usuario
@@ -432,13 +434,21 @@ function mostrarEstadisticas() {
 
     // Obtener puntuaciones del usuario
     let scores = JSON.parse(localStorage.getItem('scores')) || [];
-    let userScore = scores.find(score => score.name === userName);
 
-    // Obtener tiempo total del usuario
-    let totalTime = localStorage.getItem('tiempoTotal') || 0;
+    // Objeto para almacenar estadísticas por categoría
+    let categoryStats = {
+        'HTML': { puntos: 0, vecesJugadas: 0 },
+        'CSS': { puntos: 0, vecesJugadas: 0 },
+        'JavaScript': { puntos: 0, vecesJugadas: 0 }
+    };
 
-    // Obtener ranking
-    let ranking = scores.findIndex(score => score.name === userName) + 1;
+    // Calcular estadísticas por categoría
+    scores.forEach(score => {
+        // Si la categoría no está definida en el objeto, asignarla a HTML por defecto
+        let category = score.category || 'HTML';
+        categoryStats[category].vecesJugadas++;
+        categoryStats[category].puntos += score.score;
+    });
 
     // Mostrar modal
     let modal = document.getElementById('myModal');
@@ -446,11 +456,29 @@ function mostrarEstadisticas() {
     let modalUserScore = document.getElementById('modalUserScore');
     let modalTotalTime = document.getElementById('modalTotalTime');
     let modalRanking = document.getElementById('modalRanking');
+    let modalCategoryStats = document.getElementById('modalCategoryStats');
 
     modalUserName.textContent = userName;
-    modalUserScore.textContent = userScore ? userScore.score : 'No disponible';
+    
+    // Calcular el puntaje total del usuario
+    let totalScore = scores.reduce((acc, score) => acc + score.score, 0);
+    modalUserScore.textContent = totalScore;
+
+    // Calcular el tiempo total de juego del usuario (solo como ejemplo, necesitarías implementar esto)
+    let totalTime = 0; // Aquí deberías calcular el tiempo total de juego
     modalTotalTime.textContent = totalTime;
+
+    // Calcular el ranking del usuario (por ejemplo, la posición basada en el puntaje total)
+    let ranking = "1"; // Aquí deberías calcular la posición del usuario en función del puntaje total
     modalRanking.textContent = ranking;
+
+    // Mostrar estadísticas por categoría en el modal
+    modalCategoryStats.innerHTML = '';
+    Object.entries(categoryStats).forEach(([category, stats]) => {
+        let categoryItem = document.createElement('p');
+        categoryItem.textContent = `Categoría ${category}: Puntos ${stats.puntos}, Veces jugadas ${stats.vecesJugadas}`;
+        modalCategoryStats.appendChild(categoryItem);
+    });
 
     modal.style.display = "block";
 
@@ -467,4 +495,3 @@ function mostrarEstadisticas() {
         }
     }
 }
-
