@@ -10,34 +10,39 @@
     <nav class="navbar">
       <a href=""><img src="/memoria/imgs/scapeRoom.jpg" height="54px" width="60px"></a>
       <div class="auth-buttons">
-          <!-- Botón de Perfil --> 
-          <button id="perfilButton">Perfil</button>
           <!-- Botón de logout -->
           <button id="logoutButton" style="display:none;">Log Out</button>
       </div>
       </nav>
-      
       <div id="profile-section">
-          <h2 style="color: black;">Perfil</h2>
-          <button id="editUserButton">Modificar Usuario</button>
-          <button id="deleteUserButton">Eliminar Usuario</button>
-          <button id="showStatsButton">Mostrar Estadísticas</button>
-      </div>
-      <div id="myModal" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <h2>Estadísticas del juego para <span id="modalUserName"></span>:</h2>
-          <p>Puntos: <span id="modalUserScore"></span></p>
-          <p>Tiempo total: <span id="modalTotalTime"></span> segundos</p>
-          <p>Ranking: <span id="modalRanking"></span></p>
-        </div>
-      </div>
-      
-
-   
-    <div class="control-buttons">
-      <span>Start Game</span>
+        <h2>Perfil</h2>
+        <p>Nombre de usuario: <span id="userNameDisplay"></span></p>
+        <button id="editUserButton">Modificar Usuario</button>
+        <button id="deleteUserButton">Eliminar Usuario</button>
+        <button id="showStatsButton">Mostrar Estadísticas</button>
     </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Estadísticas del juego para <span id="modalUserName"></span>:</h2>
+            <p>Veces jugadas: <span id="modalVecesJugadas"></span>  veces.</p>
+            <p>Veces ganadas con 10 puntos: <span id="modalVeces10Puntos"></span> veces.</p>
+            <p>Veces ganadas con 15 puntos: <span id="modalVeces15Puntos"></span> veces.</p>
+            <p>Veces ganadas con 20 puntos: <span id="modalVeces20Puntos"></span> veces.</p>
+            <p>Tiempo total ultimo Juego: <span id="modalTotalTime"></span> segundos</p>
+            <p>Puntos: <span id="modalUserScore"></span> puntos</p>
+            <p>Media: <span id="modalMedia"></span> segundos</p>
+            <p>Ranking: <span id="modalRanking"></span></p>
+        </div>
+    </div>
+    
+    
+      
+      <div class="control-buttons">
+        <span id="startButton">Start Game</span>
+      </div>
+   
+ 
     <div class="info-container">
       <div class="container">
         <div class="name">
@@ -177,6 +182,7 @@
   
     <audio id="success" src="audio/success.mp3" preload="auto"></audio>
     <audio id="fail" src="audio/fail.mp3" preload="auto"></audio>
+    
     
     <footer>
       <div class="foot">

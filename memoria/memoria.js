@@ -6,62 +6,56 @@ let tiempoTotalSegundos = 0;
 let cronometroInterval;
 let intentos = 0; // Variable global para el número de intentos
 
-// Al cargar la página
-window.addEventListener('load', function () {
+// Obtener el nombre de usuario del localStorage
+let savedName = localStorage.getItem('savedName');
 
-    // Verificar si hay un nombre guardado en el localStorage
-    let savedName = localStorage.getItem('savedName');
-
-    console.log(localStorage.getItem('savedName'));
-    if (savedName) {
-
-        // Si hay un nombre guardado, establecerlo en el elemento HTML
-        document.getElementById('userName').innerText = savedName;
-    }
-
-
-
-    // Seleccionar el botón de inicio del juego
-    document.querySelector(".control-buttons span").onclick = function () {
-        // Obtener el nombre del usuario
-        let yourName = localStorage.getItem('savedName');
-
-        // Si el nombre no está vacío
-        if (yourName && yourName.trim() !== "") {
-            // Establecer el nombre en la interfaz
-            document.getElementById('userName').innerHTML = yourName;
-        }
-        console.log(savedName);
-        // Guardar el nombre del usuario en el localStorage
-        localStorage.setItem('savedName', yourName);
-
-        // Remove Splash Screen
-        document.querySelector(".control-buttons").remove();
-
-        // Iniciar cronómetro
-        cronometroInterval = setInterval(actualizarCronometro, 10);
-
-        // Restablecer puntuación
-        document.querySelector('.tries span').innerHTML = '0';
-    };
+document.addEventListener('DOMContentLoaded', function () {
+    // Verificar si el usuario está logueado al cargar la página
+    verificarInicioSesion();
+    
+    // Seleccionar el botón de inicio del juego y asignar el evento onclick
+    const startButton = document.querySelector(".control-buttons #startButton");
+    if (startButton) {
+        startButton.onclick = function () {
+            // Verificar si el usuario está logueado al intentar iniciar el juego
+            verificarInicioSesion();
+        };
+    } 
 });
 
-// Al cargar la página
-window.onload = function () {
+
+
+// Establecer el nombre de usuario en el elemento con el ID "userName"
+document.getElementById('userName').textContent = savedName;
+document.getElementById('userNameDisplay').textContent = savedName;
+
+// Función para verificar si el usuario está logueado
+function verificarInicioSesion() {
+    // Obtener el nombre de usuario guardado
+    let savedName = localStorage.getItem('savedName');
+
+    if (!savedName || savedName.trim() === "") {
+        // Si el usuario no está logueado, redirigirlo a la página de inicio de sesión
+        window.location.href = '/welcome.html';
+    } else {
+        // Si el usuario está logueado, iniciar el juego
+        startGame();
+    }
+}
+
+// Función para iniciar el juego
+function startGame() {
+    // Remove Splash Screen
+    document.querySelector(".control-buttons").remove();
+
+    // Iniciar cronómetro
+    cronometroInterval = setInterval(actualizarCronometro, 10);
+
     // Restablecer puntuación
     document.querySelector('.tries span').innerHTML = '0';
 
-    // Seleccionar el botón de inicio del juego y asignar el evento onclick
-    document.querySelector(".control-buttons span").onclick = function () {
-        // Iniciar cronómetro
-        cronometroInterval = setInterval(actualizarCronometro, 10);
-
-        // Remove Splash Screen
-        document.querySelector(".control-buttons").remove();
-    };
-
     // Seleccionar el contenedor de bloques
-    blocksContainer = document.querySelector(".memory-game-blocks");
+    let blocksContainer = document.querySelector(".memory-game-blocks");
 
     // Create Array From Game Blocks
     let blocks = Array.from(blocksContainer.children);
@@ -82,7 +76,7 @@ window.onload = function () {
             flipBlock(block);
         });
     });
-};
+}
 
 // Función para actualizar el cronómetro
 function actualizarCronometro() {
@@ -104,6 +98,7 @@ function actualizarCronometro() {
     document.getElementById('segundos').textContent = segundos < 10 ? '0' + segundos : segundos;
     document.getElementById('milisegundos').textContent = milisegundos < 10 ? '0' + milisegundos : milisegundos;
 }
+
 
 // Función para finalizar el juego
 function finalizarJuego(puntos) {
@@ -330,8 +325,11 @@ function verificarPuntos(puntos) {
             window.location.reload();
         } else {
             // Si el usuario no quiere jugar de nuevo, redirigirlo a la página de bienvenida
-            window.location.href = '../welcome.html';
+            window.location.href = '/welcome.html';
         }
+    } else {
+        // Si el usuario alcanzó los 20 puntos, redirigirlo al otro juego
+        window.location.href = '/JuegoQuiz/juegoQuiz.html';
     }
 }
 
@@ -365,23 +363,73 @@ document.getElementById('logoutButton').addEventListener('click', function(event
 });
 // Función para modificar usuario, contraseña y correo electrónico
 document.getElementById('editUserButton').addEventListener('click', function() {
-    let newName = prompt("Introduce el nuevo nombre de usuario:");
-    if (newName !== null && newName.trim() !== "") {
-        let newPassword = prompt("Introduce la nueva contraseña:");
-        let newEmail = prompt("Introduce el nuevo correo electrónico:");
+  // Obtener el botón "Modificar Usuario"
+const editUserButton = document.getElementById('editUserButton');
 
-        // Verificar que las entradas no estén vacías antes de guardarlas
-        if (newPassword !== null && newEmail !== null) {
-            localStorage.setItem('savedName', newName);
-            localStorage.setItem('savedPassword', newPassword);
-            localStorage.setItem('savedEmail', newEmail);
+// Función para crear el formulario de modificación de usuario
+function createEditUserForm() {
+    // Crear el formulario
+    const form = document.createElement('form');
+    form.id = 'editUserForm';
 
-            document.getElementById('userName').innerText = newName;
-            alert("¡Usuario modificado con éxito!");
-        } else {
-            alert("Error: No se han proporcionado la contraseña o el correo electrónico.");
-        }
-    }
+    // Crear los campos del formulario
+    const newNameLabel = document.createElement('label');
+    newNameLabel.for = 'newName';
+    newNameLabel.textContent = 'Nuevo nombre de usuario:';
+    const newNameInput = document.createElement('input');
+    newNameInput.type = 'text';
+    newNameInput.id = 'newName';
+    newNameInput.name = 'newName';
+
+    const newPasswordLabel = document.createElement('label');
+    newPasswordLabel.for = 'newPassword';
+    newPasswordLabel.textContent = 'Nueva contraseña:';
+    const newPasswordInput = document.createElement('input');
+    newPasswordInput.type = 'password';
+    newPasswordInput.id = 'newPassword';
+    newPasswordInput.name = 'newPassword';
+
+    const newEmailLabel = document.createElement('label');
+    newEmailLabel.for = 'newEmail';
+    newEmailLabel.textContent = 'Nuevo correo electrónico:';
+    const newEmailInput = document.createElement('input');
+    newEmailInput.type = 'email';
+    newEmailInput.id = 'newEmail';
+    newEmailInput.name = 'newEmail';
+
+    // Crear el botón de enviar
+    const submitButton = document.createElement('button');
+    submitButton.type = 'submit';
+    submitButton.textContent = 'Guardar cambios';
+
+    // Agregar los campos al formulario
+    form.appendChild(newNameLabel);
+    form.appendChild(newNameInput);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(document.createElement('br'));
+
+    form.appendChild(newPasswordLabel);
+    form.appendChild(newPasswordInput);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(document.createElement('br'));
+
+    form.appendChild(newEmailLabel);
+    form.appendChild(newEmailInput);
+    form.appendChild(document.createElement('br'));
+    form.appendChild(document.createElement('br'));
+
+    form.appendChild(submitButton);
+
+    // Agregar el formulario al DOM
+    document.getElementById('profile-section').appendChild(form);
+}
+
+// Escuchar el evento de clic en el botón "Modificar Usuario"
+editUserButton.addEventListener('click', function() {
+    // Crear el formulario de modificación de usuario
+    createEditUserForm();
+});
+
 });
 
 
@@ -396,12 +444,11 @@ document.getElementById('deleteUserButton').addEventListener('click', function()
     }
 });
 
+
 // Función para mostrar estadísticas del juego
 document.getElementById('showStatsButton').addEventListener('click', function() {
     mostrarEstadisticas();
 });
-
-// Función para mostrar estadísticas del juego
 
 function mostrarEstadisticas() {
     // Obtener nombre del usuario
@@ -413,13 +460,27 @@ function mostrarEstadisticas() {
 
     // Obtener puntuaciones del usuario
     let scores = JSON.parse(localStorage.getItem('scores')) || [];
-    let userScore = scores.find(score => score.name === userName);
+    let userScores = scores.filter(score => score.name === userName);
 
     // Obtener tiempo total del usuario
     let totalTime = localStorage.getItem('tiempoTotal') || 0;
 
     // Obtener ranking
     let ranking = scores.findIndex(score => score.name === userName) + 1;
+    
+    let vecesJugadas = userScores.length;
+
+    // Calcular la media del usuario
+    let media = 0;
+    if (vecesJugadas > 0) {
+        let totalPuntos = userScores.reduce((total, score) => total + score.score, 0);
+        media = totalPuntos / vecesJugadas;
+    }
+
+    // Contadores para el número de veces que el usuario ha ganado con 10, 15 y 20 puntos
+    let veces10Puntos = userScores.filter(score => score.score === 10).length;
+    let veces15Puntos = userScores.filter(score => score.score === 15).length;
+    let veces20Puntos = userScores.filter(score => score.score === 20).length;
 
     // Mostrar modal
     let modal = document.getElementById('myModal');
@@ -427,11 +488,21 @@ function mostrarEstadisticas() {
     let modalUserScore = document.getElementById('modalUserScore');
     let modalTotalTime = document.getElementById('modalTotalTime');
     let modalRanking = document.getElementById('modalRanking');
+    let modalVecesJugadas = document.getElementById('modalVecesJugadas');
+    let modalMedia = document.getElementById('modalMedia');
+    let modalVeces10Puntos = document.getElementById('modalVeces10Puntos');
+    let modalVeces15Puntos = document.getElementById('modalVeces15Puntos');
+    let modalVeces20Puntos = document.getElementById('modalVeces20Puntos');
 
     modalUserName.textContent = userName;
-    modalUserScore.textContent = userScore ? userScore.score : 'No disponible';
+    modalUserScore.textContent = userScores.length > 0 ? userScores[0].score : 'No disponible';
     modalTotalTime.textContent = totalTime;
     modalRanking.textContent = ranking;
+    modalVecesJugadas.textContent = vecesJugadas;
+    modalMedia.textContent = media.toFixed(2); // Redondear la media a 2 decimales
+    modalVeces10Puntos.textContent = veces10Puntos;
+    modalVeces15Puntos.textContent = veces15Puntos;
+    modalVeces20Puntos.textContent = veces20Puntos;
 
     modal.style.display = "block";
 

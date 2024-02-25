@@ -1,13 +1,23 @@
-// Al cargar la página
+// Obtener el nombre de usuario del localStorage
+let savedName = localStorage.getItem('savedName');
+// Verificar si el usuario está autenticado al cargar la página
 window.addEventListener('load', function () {
-  // Verificar si hay un nombre guardado en el localStorage
-  let savedName = localStorage.getItem('savedName');
+    // Obtener el nombre de usuario del localStorage
+    let savedName = localStorage.getItem('savedName');
 
-  // Si hay un nombre guardado, establecerlo en el elemento HTML
-  if (savedName) {
-      document.getElementById('userName').innerText = savedName;
-  }
+    // Si no hay un nombre de usuario guardado, redirigir a la página de bienvenida
+    if (!savedName) {
+        window.location.href = '../welcome.html';
+    } else {
+        // Si hay un nombre guardado, establecerlo en la interfaz de usuario
+        document.getElementById('userName').innerText = savedName;
+    }
 });
+
+
+// Establecer el nombre de usuario en el elemento con el ID "userName"
+document.getElementById('userName').textContent = savedName;
+document.getElementById('userNameDisplay').textContent = savedName;
 
 // Select Elements
 let countSpan = document.querySelector(".count span");
@@ -317,3 +327,144 @@ document.getElementById('logoutButton').addEventListener('click', function (even
 
 // Mostrar el ranking al cargar la página
 mostrarRanking();
+
+// Función para mostrar estadísticas del juego
+document.getElementById('showStatsButton').addEventListener('click', function() {
+    mostrarEstadisticas();
+});
+
+
+
+
+
+// Función para modificar usuario, contraseña y correo electrónico
+document.getElementById('editUserButton').addEventListener('click', function() {
+    // Obtener el botón "Modificar Usuario"
+  const editUserButton = document.getElementById('editUserButton');
+  
+  // Función para crear el formulario de modificación de usuario
+  function createEditUserForm() {
+      // Crear el formulario
+      const form = document.createElement('form');
+      form.id = 'editUserForm';
+  
+      // Crear los campos del formulario
+      const newNameLabel = document.createElement('label');
+      newNameLabel.for = 'newName';
+      newNameLabel.textContent = 'Nuevo nombre de usuario:';
+      const newNameInput = document.createElement('input');
+      newNameInput.type = 'text';
+      newNameInput.id = 'newName';
+      newNameInput.name = 'newName';
+  
+      const newPasswordLabel = document.createElement('label');
+      newPasswordLabel.for = 'newPassword';
+      newPasswordLabel.textContent = 'Nueva contraseña:';
+      const newPasswordInput = document.createElement('input');
+      newPasswordInput.type = 'password';
+      newPasswordInput.id = 'newPassword';
+      newPasswordInput.name = 'newPassword';
+  
+      const newEmailLabel = document.createElement('label');
+      newEmailLabel.for = 'newEmail';
+      newEmailLabel.textContent = 'Nuevo correo electrónico:';
+      const newEmailInput = document.createElement('input');
+      newEmailInput.type = 'email';
+      newEmailInput.id = 'newEmail';
+      newEmailInput.name = 'newEmail';
+  
+      // Crear el botón de enviar
+      const submitButton = document.createElement('button');
+      submitButton.type = 'submit';
+      submitButton.textContent = 'Guardar cambios';
+  
+      // Agregar los campos al formulario
+      form.appendChild(newNameLabel);
+      form.appendChild(newNameInput);
+      form.appendChild(document.createElement('br'));
+      form.appendChild(document.createElement('br'));
+  
+      form.appendChild(newPasswordLabel);
+      form.appendChild(newPasswordInput);
+      form.appendChild(document.createElement('br'));
+      form.appendChild(document.createElement('br'));
+  
+      form.appendChild(newEmailLabel);
+      form.appendChild(newEmailInput);
+      form.appendChild(document.createElement('br'));
+      form.appendChild(document.createElement('br'));
+  
+      form.appendChild(submitButton);
+  
+      // Agregar el formulario al DOM
+      document.getElementById('profile-section').appendChild(form);
+  }
+  
+  // Escuchar el evento de clic en el botón "Modificar Usuario"
+  editUserButton.addEventListener('click', function() {
+      // Crear el formulario de modificación de usuario
+      createEditUserForm();
+  });
+  
+  });
+
+// Función para eliminar usuario
+document.getElementById('deleteUserButton').addEventListener('click', function() {
+    if (confirm("¿Estás seguro de que quieres eliminar tu usuario?")) {
+        localStorage.removeItem('savedName');
+        document.getElementById('userName').innerText = "";
+        alert("¡Usuario eliminado con éxito!");
+        // Redireccionar a la página de bienvenida
+        window.location.href = '/welcome.html';
+    }
+});
+
+
+// Función para mostrar estadísticas del juego
+
+function mostrarEstadisticas() {
+    // Obtener nombre del usuario
+    let userName = localStorage.getItem('savedName');
+    if (!userName) {
+        alert("No hay usuario registrado.");
+        return;
+    }
+
+    // Obtener puntuaciones del usuario
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    let userScore = scores.find(score => score.name === userName);
+
+    // Obtener tiempo total del usuario
+    let totalTime = localStorage.getItem('tiempoTotal') || 0;
+
+    // Obtener ranking
+    let ranking = scores.findIndex(score => score.name === userName) + 1;
+
+    // Mostrar modal
+    let modal = document.getElementById('myModal');
+    let modalUserName = document.getElementById('modalUserName');
+    let modalUserScore = document.getElementById('modalUserScore');
+    let modalTotalTime = document.getElementById('modalTotalTime');
+    let modalRanking = document.getElementById('modalRanking');
+
+    modalUserName.textContent = userName;
+    modalUserScore.textContent = userScore ? userScore.score : 'No disponible';
+    modalTotalTime.textContent = totalTime;
+    modalRanking.textContent = ranking;
+
+    modal.style.display = "block";
+
+    // Cerrar modal al hacer clic en la X
+    let closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Cerrar modal al hacer clic fuera del contenido del modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+
