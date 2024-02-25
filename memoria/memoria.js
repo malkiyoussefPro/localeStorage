@@ -363,3 +363,88 @@ document.getElementById('logoutButton').addEventListener('click', function(event
     // Redireccionar a la página de inicio de sesión
     window.location.href = '../welcome.html';
 });
+// Función para modificar usuario, contraseña y correo electrónico
+document.getElementById('editUserButton').addEventListener('click', function() {
+    let newName = prompt("Introduce el nuevo nombre de usuario:");
+    if (newName !== null && newName.trim() !== "") {
+        let newPassword = prompt("Introduce la nueva contraseña:");
+        let newEmail = prompt("Introduce el nuevo correo electrónico:");
+
+        // Verificar que las entradas no estén vacías antes de guardarlas
+        if (newPassword !== null && newEmail !== null) {
+            localStorage.setItem('savedName', newName);
+            localStorage.setItem('savedPassword', newPassword);
+            localStorage.setItem('savedEmail', newEmail);
+
+            document.getElementById('userName').innerText = newName;
+            alert("¡Usuario modificado con éxito!");
+        } else {
+            alert("Error: No se han proporcionado la contraseña o el correo electrónico.");
+        }
+    }
+});
+
+
+// Función para eliminar usuario
+document.getElementById('deleteUserButton').addEventListener('click', function() {
+    if (confirm("¿Estás seguro de que quieres eliminar tu usuario?")) {
+        localStorage.removeItem('savedName');
+        document.getElementById('userName').innerText = "";
+        alert("¡Usuario eliminado con éxito!");
+        // Redireccionar a la página de bienvenida
+        window.location.href = '/welcome.html';
+    }
+});
+
+// Función para mostrar estadísticas del juego
+document.getElementById('showStatsButton').addEventListener('click', function() {
+    mostrarEstadisticas();
+});
+
+// Función para mostrar estadísticas del juego
+
+function mostrarEstadisticas() {
+    // Obtener nombre del usuario
+    let userName = localStorage.getItem('savedName');
+    if (!userName) {
+        alert("No hay usuario registrado.");
+        return;
+    }
+
+    // Obtener puntuaciones del usuario
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+    let userScore = scores.find(score => score.name === userName);
+
+    // Obtener tiempo total del usuario
+    let totalTime = localStorage.getItem('tiempoTotal') || 0;
+
+    // Obtener ranking
+    let ranking = scores.findIndex(score => score.name === userName) + 1;
+
+    // Mostrar modal
+    let modal = document.getElementById('myModal');
+    let modalUserName = document.getElementById('modalUserName');
+    let modalUserScore = document.getElementById('modalUserScore');
+    let modalTotalTime = document.getElementById('modalTotalTime');
+    let modalRanking = document.getElementById('modalRanking');
+
+    modalUserName.textContent = userName;
+    modalUserScore.textContent = userScore ? userScore.score : 'No disponible';
+    modalTotalTime.textContent = totalTime;
+    modalRanking.textContent = ranking;
+
+    modal.style.display = "block";
+
+    // Cerrar modal al hacer clic en la X
+    let closeBtn = document.getElementsByClassName("close")[0];
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Cerrar modal al hacer clic fuera del contenido del modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}

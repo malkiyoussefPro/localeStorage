@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Perfil de Usuario</title>
+</head>
+<body>
+    <div class="auth-buttons">
+        <!-- Botón de Perfil --> 
+        <button id="perfilButton">Perfil</button>
+        <!-- Botón de logout -->
+        <button id="logoutButton" style="display:none;">Log Out</button>
+    </div>
+
+    <div id="perfilForm" style="display:none;">
+        <h2>Perfil de Usuario</h2>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button id="guardarPerfil">Guardar</button>
+        <button id="eliminarPerfil">Eliminar Perfil</button>
+    </div>
+
+    <script>
+        document.getElementById("perfilButton").addEventListener("click", function() {
+            document.getElementById("perfilForm").style.display = "block";
+            
+            // Cargar los datos del usuario desde el localStorage
+            let userData = JSON.parse(localStorage.getItem("userData"));
+            if(userData) {
+                document.getElementById("nombre").value = userData.nombre;
+                document.getElementById("email").value = userData.email;
+                document.getElementById("password").value = userData.password;
+            }
+        });
+
+        document.getElementById("guardarPerfil").addEventListener("click", function() {
+            let nombre = document.getElementById("nombre").value;
+            let email = document.getElementById("email").value;
+            let password = document.getElementById("password").value;
+
+            // Guardar los datos actualizados en el localStorage
+            let userData = {
+                nombre: nombre,
+                email: email,
+                password: password
+            };
+            localStorage.setItem("userData", JSON.stringify(userData));
+
+            alert("Perfil actualizado correctamente");
+        });
+
+        document.getElementById("eliminarPerfil").addEventListener("click", function() {
+            if (confirm("¿Estás seguro de que quieres eliminar tu perfil?")) {
+                // Eliminar los datos del usuario del localStorage
+                localStorage.removeItem("userData");
+                // Limpiar los campos del formulario
+                document.getElementById("nombre").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("password").value = "";
+                alert("Perfil eliminado correctamente");
+            }
+        });
+    </script>
+</body>
+</html>
